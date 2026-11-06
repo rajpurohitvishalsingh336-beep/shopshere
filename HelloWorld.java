@@ -5,7 +5,9 @@ public class HelloWorld {
         System.out.println("Hello World!");
 
         System.out.println("Jenkins Poll SCM");
-        
-        System.out.println("Version 1");
+
+        System.out.println("Version 2");
+
+        System.out.println("Automatic Build Triggered!");
     }
 }
