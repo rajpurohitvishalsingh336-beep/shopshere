@@ -1,26 +1,33 @@
+
 pipeline {
     agent any
 
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building ..'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying...'
-            }
-        }
+    options {
+        skipDefaultCheckout(true)
     }
-    post{
-        always{
-            echo 'Thank you'
+
+    stages {
+
+        stage('Clone') {
+            steps {
+                echo 'Cloning GitHub Repository'
+                checkout scm
+            }
+        }
+
+        stage('Compile') {
+            steps {
+                echo 'Compiling Java Program'
+                sh 'mkdir -p out'
+                sh 'javac -d out HelloWorld.java'
+            }
+        }
+
+        stage('Execute') {
+            steps {
+                echo 'Executing Java Application'
+                sh 'java -cp out HelloWorld'
+            }
         }
     }
 }
